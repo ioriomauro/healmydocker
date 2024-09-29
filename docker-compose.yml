@@ -1,0 +1,120 @@
+services:
+  dummy:
+    develop:
+      watch:
+        - path: src/devel
+          action: rebuild
+    image: python:3-alpine
+    command: [ "python", "/src/devel/sleep.py", "-v" ]
+    labels:
+      - healme=true
+    volumes:
+      - ./src/devel:/src/devel
+    environment:
+      - DISABLE_SIGNAL_HANDLER=false
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/python", "/src/devel/check.py"]
+      interval: 5s
+      timeout: 30s
+      retries: 5
+      start_period: 10s
+
+  dummy_no:
+    develop:
+      watch:
+        - path: src/devel
+          action: rebuild
+    image: python:3-alpine
+    command: [ "python", "/src/devel/sleep.py", "-v" ]
+    labels:
+      - healme=false
+    volumes:
+      - ./src/devel:/src/devel
+    environment:
+      - DISABLE_SIGNAL_HANDLER=false
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/python", "/src/devel/check.py"]
+      interval: 5s
+      timeout: 30s
+      retries: 5
+      start_period: 10s
+
+  dummy_02:
+    develop:
+      watch:
+        - path: src/devel
+          action: rebuild
+    image: python:3-alpine
+    command: [ "python", "/src/devel/sleep.py", "-v" ]
+    labels:
+      - healme=true
+    volumes:
+      - ./src/devel:/src/devel
+    environment:
+      - DISABLE_SIGNAL_HANDLER=false
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/python", "/src/devel/check.py"]
+      interval: 5s
+      timeout: 30s
+      retries: 5
+      start_period: 10s
+
+  dummy_03:
+    develop:
+      watch:
+        - path: src/devel
+          action: rebuild
+    image: python:3-alpine
+    command: [ "python", "/src/devel/sleep.py", "-v" ]
+    labels:
+      - healme=true
+    volumes:
+      - ./src/devel:/src/devel
+    environment:
+      - DISABLE_SIGNAL_HANDLER=false
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/python", "/src/devel/check.py"]
+      interval: 5s
+      timeout: 30s
+      retries: 5
+      start_period: 10s
+
+  dummy_04:
+    develop:
+      watch:
+        - path: src/devel
+          action: rebuild
+    image: python:3-alpine
+    command: [ "python", "/src/devel/sleep.py", "-v" ]
+    labels:
+      - healme=true
+    volumes:
+      - ./src/devel:/src/devel
+    environment:
+      - DISABLE_SIGNAL_HANDLER=false
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/python", "/src/devel/check.py"]
+      interval: 5s
+      timeout: 30s
+      retries: 5
+      start_period: 10s
+
+  dummy_05:
+    develop:
+      watch:
+        - path: src/devel
+          action: rebuild
+    image: python:3-alpine
+    command: [ "python", "/src/devel/sleep.py", "-v" ]
+    labels:
+      - healme=true
+    volumes:
+      - ./src/devel:/src/devel
+    environment:
+      - DISABLE_SIGNAL_HANDLER=true
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/python", "/src/devel/check.py"]
+      interval: 5s
+      timeout: 30s
+      retries: 5
+      start_period: 10s
