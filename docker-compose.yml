@@ -14,7 +14,8 @@ services:
     develop:
       watch:
         - path: src/devel
-          action: rebuild
+          action: sync+restart
+          target: /src/devel
     image: python:3-alpine
     command: [ "python", "/src/devel/sleep.py", "-v" ]
     labels:
@@ -34,7 +35,8 @@ services:
     develop:
       watch:
         - path: src/devel
-          action: rebuild
+          action: sync+restart
+          target: /src/devel
     image: python:3-alpine
     command: [ "python", "/src/devel/sleep.py", "-v" ]
     labels:
@@ -54,7 +56,8 @@ services:
     develop:
       watch:
         - path: src/devel
-          action: rebuild
+          action: sync+restart
+          target: /src/devel
     image: python:3-alpine
     command: [ "python", "/src/devel/sleep.py", "-v" ]
     labels:
@@ -74,7 +77,8 @@ services:
     develop:
       watch:
         - path: src/devel
-          action: rebuild
+          action: sync+restart
+          target: /src/devel
     image: python:3-alpine
     command: [ "python", "/src/devel/sleep.py", "-v" ]
     labels:
@@ -94,7 +98,8 @@ services:
     develop:
       watch:
         - path: src/devel
-          action: rebuild
+          action: sync+restart
+          target: /src/devel
     image: python:3-alpine
     command: [ "python", "/src/devel/sleep.py", "-v" ]
     labels:
@@ -114,7 +119,8 @@ services:
     develop:
       watch:
         - path: src/devel
-          action: rebuild
+          action: sync+restart
+          target: /src/devel
     image: python:3-alpine
     command: [ "python", "/src/devel/sleep.py", "-v" ]
     labels:
