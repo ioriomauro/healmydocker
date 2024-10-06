@@ -22,8 +22,6 @@ services:
       - healme=true
     volumes:
       - ./src/devel:/src/devel
-    environment:
-      - DISABLE_SIGNAL_HANDLER=false
     healthcheck:
       test: ["CMD", "/usr/local/bin/python", "/src/devel/check.py"]
       interval: 5s
@@ -43,8 +41,6 @@ services:
       - healme=false
     volumes:
       - ./src/devel:/src/devel
-    environment:
-      - DISABLE_SIGNAL_HANDLER=false
     healthcheck:
       test: ["CMD", "/usr/local/bin/python", "/src/devel/check.py"]
       interval: 5s
@@ -64,8 +60,6 @@ services:
       - healme=true
     volumes:
       - ./src/devel:/src/devel
-    environment:
-      - DISABLE_SIGNAL_HANDLER=false
     healthcheck:
       test: ["CMD", "/usr/local/bin/python", "/src/devel/check.py"]
       interval: 5s
@@ -85,8 +79,6 @@ services:
       - healme=true
     volumes:
       - ./src/devel:/src/devel
-    environment:
-      - DISABLE_SIGNAL_HANDLER=false
     healthcheck:
       test: ["CMD", "/usr/local/bin/python", "/src/devel/check.py"]
       interval: 5s
@@ -106,8 +98,6 @@ services:
       - healme=true
     volumes:
       - ./src/devel:/src/devel
-    environment:
-      - DISABLE_SIGNAL_HANDLER=false
     healthcheck:
       test: ["CMD", "/usr/local/bin/python", "/src/devel/check.py"]
       interval: 5s
