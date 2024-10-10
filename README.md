@@ -76,9 +76,9 @@ There are three alternatives to run HealMyDocker.
     docker run -d \
         --name healmydocker \
         --restart=always \
-        --network none \
+        --network=none \
         -v /var/run/docker.sock:/var/run/docker.sock \
-        ioriomauro/healmydocker
+        ioriomauro/healmydocker:latest
     ```
 
     This is the simplest way. It will run HealMyDocker as a standalone
@@ -124,6 +124,18 @@ There are three alternatives to run HealMyDocker.
 
     Assuming that your application already runs in compose, just add the
     `healmydocker` service to it.
+
+Please note that all the examples fetch the `latest` image from the registry.
+This is not recommended for production environments; latest image is built and
+pushed in ci without major testing, while semver tags are fully tested.
+Please stick to (at least) a major version when going in production.
+For example you can safely use something like:
+
+> docker run -d `ioriomauro/healmydocker:1.0`
+
+or
+
+> docker run -d `ioriomauro/healmydocker:1`
 
 ## Security
 
