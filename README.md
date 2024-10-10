@@ -76,12 +76,14 @@ There are three alternatives to run HealMyDocker.
     docker run -d \
         --name healmydocker \
         --restart=always \
+        --network none \
         -v /var/run/docker.sock:/var/run/docker.sock \
         ioriomauro/healmydocker
     ```
 
     This is the simplest way. It will run HealMyDocker as a standalone
-    container, in detached mode, mounting the host docker socket to it.
+    container, in detached mode, with non network, mounting the host docker
+    socket to it.
 
 2.  docker-compose standalone
 
