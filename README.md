@@ -73,7 +73,7 @@ There are three alternatives to run HealMyDocker.
 1.  Docker CLI
 
     ```shell
-    docker run -d \
+    docker run --rm -d \
         --name healmydocker \
         --restart=always \
         --network=none \
@@ -81,9 +81,9 @@ There are three alternatives to run HealMyDocker.
         ioriomauro/healmydocker:latest
     ```
 
-    This is the simplest way. It will run HealMyDocker as a standalone
-    container, in detached mode, with non network, mounting the host docker
-    socket to it.
+    This is the simplest way. It will run HealMyDocker as a standalone,
+    ephemeral container, in detached mode, with no network, mounting the host
+    docker socket to it.
 
 2.  docker-compose standalone
 
