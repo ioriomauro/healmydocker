@@ -127,8 +127,9 @@ There are three alternatives to run HealMyDocker.
 
 HealMyDocker container runs with standard privileges and no network (as it
 has no needs to communicate with other hosts); it has read/write access to the
-docker socket, but it only listens for docker events and never writes to the
-socket.
+docker socket, but it only listens for docker events and issue restart commands
+for unhealthy containers, and periodically pings the daemon for heartbeating
+purposes.
 
 ## Contribute
 
