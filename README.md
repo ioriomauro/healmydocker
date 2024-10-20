@@ -42,33 +42,44 @@ tool for their unhealty containers.
 
 This is NOT a *6th-Level Evocation Heal spell*; if your container has problems
 that cannot be resolved by a simple restart (e.g.: software bugs, broken
-network, misconfiguraiton...) nothing will change upon restart and it will
+network, misconfiguration...) nothing will change upon restart and it will
 start malfunctioning again.
 
 ## Install
 
 To use this project you'll need an already installed and running docker daemon.
-Please refer to [GetDocker](https://docs.docker.com/get-started/get-docker/) for
-all the instructions.
+Please refer to [GetDocker][7] for all the instructions.
 
 ## Configuration
 
 HealMyDocker need to attach to docker socket (usually `/var/run/docker.sock`)
 on the host machine. Il will subscribe to system events, filtering for
 `health_status`, and will react to `unhealthy` events if and only if the
-marked container has the correct label with the correct value:
+marked container has the correct label with the correct value. The default
+label name is `healme` and the value MUST be as in the following example:
 
 > healme: true
 
-`false` value or any other labels applyed to the target container will cause
-HealMyDocker to ignore the event and continue.
+Starting from version 1.1.0, container label can be customized with the
+`HMD_CONTAINER_LABEL` environment label. For example with:
+
+```shell
+    docker run \
+        -e HMD_CONTAINER_LABEL=healmyapp \
+        ioriomauro/healmydocker:latest
+```
+
+you can attach the label `healmyapp=true` (pun intended) to your app container.
+
+Different label values or any other labels applied to the target container
+will cause HealMyDocker to ignore the event and continue.
 
 HealMyDocker runs independently from the machine Timezone, so no further
 configuration is required.
 
 ## Usage
 
-There are three alternatives to run HealMyDocker.
+There are three ways to run HealMyDocker.
 
 1.  Docker CLI
 
@@ -112,10 +123,12 @@ There are three alternatives to run HealMyDocker.
         image: my/app:latest
         ...
         labels:
-          healme: true
+          healthisapp: true
 
       healmydocker:
         image: ioriomauro/healmydocker:latest
+        environment:
+            - HMD_CONTAINER_LABEL=healthisapp
         network_mode: none
         restart: always
         volumes:
@@ -127,8 +140,8 @@ There are three alternatives to run HealMyDocker.
 
 Please note that all the examples fetch the `latest` image from the registry.
 This is not recommended for production environments; latest image is built and
-pushed in ci without major testing, while semver tags are fully tested.
-Please stick to (at least) a major version when going in production.
+pushed in CI without major testing, while [semver][8] tags are fully tested.
+Please stick to a `major` or `major.minor` version for production environments.
 For example you can safely use something like:
 
 > docker run -d `ioriomauro/healmydocker:1.0`
@@ -137,13 +150,16 @@ or
 
 > docker run -d `ioriomauro/healmydocker:1`
 
+Last but not least, in order to leverage HealMyDocker features, you must label
+your container as shown in [Configuration](#configuration).
+
 ## Security
 
 HealMyDocker container runs with standard privileges and no network (as it
-has no needs to communicate with other hosts); it has read/write access to the
-docker socket, but it only listens for docker events and issue restart commands
-for unhealthy containers, and periodically pings the daemon for heartbeating
-purposes.
+has no needs to communicate with other containers or the host); it has read/write
+access to the docker socket, but it only listens for docker events and issue
+restart commands for unhealthy containers, and periodically pings the daemon
+for heartbeating purposes.
 
 ## Contribute
 
@@ -172,3 +188,4 @@ under [CC-BY-4.0][3].
 [5]: https://docs.docker.com/reference/dockerfile/#healthcheck "Dockerfile HEALTHCHECK"
 [6]: https://docs.docker.com/reference/cli/docker/system/events/ "Docker System Event"
 [7]: https://docs.docker.com/get-started/get-docker/ "Get Docker"
+[8]: https://semver.org "Semantic Versioning 2.0.0"
