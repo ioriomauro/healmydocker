@@ -9,6 +9,8 @@ RUN set -uex && \
 
 WORKDIR /src
 
+ENV HMD_CONTAINER_LABEL='healme'
+
 ENTRYPOINT [ "python" ]
 CMD [ "-m", "healer", "-v" ]
 
