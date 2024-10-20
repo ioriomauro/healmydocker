@@ -1,2 +1,4 @@
 # -*- coding: utf-8 -*-
-LABEL = 'healme'
+import os
+
+LABEL = os.environ['HMD_CONTAINER_LABEL']
