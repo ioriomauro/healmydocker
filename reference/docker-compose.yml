@@ -1,0 +1,8 @@
+services:
+  healmydocker:
+    container_name: healmydocker
+    image: ioriomauro/healmydocker:v1.1.0
+    network_mode: none
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
