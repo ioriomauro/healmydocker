@@ -34,3 +34,16 @@ publish: test
         --tag "{{public_repo}}:{{sem_ver}}" \
         .
     docker image push --all-tags "{{public_repo}}"
+
+update-reference:
+    #!/usr/bin/env bash
+    cat <<EOF | sed -E -e 's#(image: {{public_repo}}):.*#\1:{{sem_ver}}#g' >reference/docker-compose.yml
+    services:
+      healmydocker:
+        container_name: healmydocker
+        image: ioriomauro/healmydocker:latest
+        network_mode: none
+        restart: always
+        volumes:
+          - /var/run/docker.sock:/var/run/docker.sock
+    EOF
