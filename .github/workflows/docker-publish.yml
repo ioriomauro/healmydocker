@@ -61,9 +61,9 @@ jobs:
           # generate Docker tags based on the following events/attributes
           tags: |
             type=schedule,pattern=nightly
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
+            type=semver,pattern=v{{version}}
+            type=semver,pattern=v{{major}}.{{minor}}
+            type=semver,pattern=v{{major}}
             type=raw,value=latest
 
       # Build and push Docker image with Buildx (don't push on PR)
