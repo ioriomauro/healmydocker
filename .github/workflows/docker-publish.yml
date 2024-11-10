@@ -9,7 +9,7 @@ on:
   schedule:
     - cron: '30 6 * * *'
   push:
-    branches: [ "main", "fix/github-action/build-with-version-tag" ]
+    branches: [ "main" ]
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
   pull_request:
