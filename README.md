@@ -36,7 +36,7 @@ listens to the docker socket and waits for [health_status][6] events; when
 a running container is marked `unhealthy`, HealMyDocker will notice and will
 restart it, hoping that it will be running correctly again.
 
-This project is indented to be used by docker application developers, system
+This project is intended to be used by docker application developers, system
 administrators, DevOps, SysOps, and whoever may need a simple auto-restart
 tool for their unhealty containers.
 
@@ -49,6 +49,9 @@ start malfunctioning again.
 
 To use this project you'll need an already installed and running docker daemon.
 Please refer to [GetDocker][7] for all the instructions.
+
+Latest stable release files can be downloaded from GitHub. For instance the
+latest docker-compose is available here: [Latest docker-compose file][9].
 
 ## Configuration
 
@@ -189,3 +192,4 @@ under [CC-BY-4.0][3].
 [6]: https://docs.docker.com/reference/cli/docker/system/events/ "Docker System Event"
 [7]: https://docs.docker.com/get-started/get-docker/ "Get Docker"
 [8]: https://semver.org "Semantic Versioning 2.0.0"
+[9]: https://github.com/ioriomauro/healmydocker/releases/latest/download/docker-compose.yml "Latest docker-compose file"
