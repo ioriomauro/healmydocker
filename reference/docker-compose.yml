@@ -1,7 +1,7 @@
 services:
   healmydocker:
     container_name: healmydocker
-    image: ioriomauro/healmydocker:v1.1.1
+    image: ioriomauro/healmydocker:v1.1.2
     network_mode: none
     restart: always
     volumes:
