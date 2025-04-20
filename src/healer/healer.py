@@ -7,7 +7,7 @@ import time
 
 from datetime import datetime, timezone
 from enum import StrEnum
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Optional
 from queue import Empty, Queue
 
 import docker
@@ -31,6 +31,7 @@ class ResurrectionQueue(threading.Thread):
         self.event_ids = set()
         self._terminate = False
         self.client = docker.from_env()
+        self.resurrection_counter = 0
 
     def __len__(self):
         return self.event_queue.qsize()
@@ -73,6 +74,7 @@ class ResurrectionQueue(threading.Thread):
             container.reload()
             logger.info('Restarted container %r in %.2f seconds - status %r',
                         container_id, time.time() - t1, container.status)
+            self.resurrection_counter += 1
         except docker.errors.NotFound:
             logger.error('Container id %r not found. Skipping resurrection',
                          container_id)
@@ -106,7 +108,7 @@ class Healer:
         self.client = c = docker.from_env()
         self.docker_info = c.info()
         self.docker_version = c.version()
-        self.events: docker.types.daemon.CancellableStream = None
+        self.events: Optional[docker.types.daemon.CancellableStream] = None
         self._terminate = False
         self.loop_thread = threading.Thread(target=self.loop)
         self.ping_thread = threading.Thread(target=self.ping)
@@ -161,6 +163,7 @@ class Healer:
             'docker_version': self.docker_version,
             'date_utc': datetime.now(timezone.utc).isoformat(),
             'resurrection_queue_len': len(self.resurrect),
+            'resurrection_counter': self.resurrect.resurrection_counter,
         }
         logger.warning('Status: %s', pprint.pformat(status))
 
