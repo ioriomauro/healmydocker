@@ -1,4 +1,5 @@
-public_repo := "ioriomauro/healmydocker"
+compose_project_name := "healmydocker"
+public_repo := "ioriomauro/" + compose_project_name
 sem_ver := `sed -E -e 's/.*(v\\d+\\.\\d+\\.\\d+).*/\\1/g' <VERSION`
 
 
@@ -6,7 +7,7 @@ _default:
     @just --list --unsorted
 
 _build:
-    docker compose build --build-arg VERSION="{{sem_ver}}"
+    docker compose build --pull --build-arg VERSION="{{sem_ver}}"
 
 shell: _build
     docker compose run --rm --entrypoint sh devel
@@ -29,11 +30,16 @@ test: _build
 publish: test
     # Assumes that the current builder supports multi-platform images
     docker buildx build \
-        --platform 'linux/arm64,linux/amd64' \
+        --pull \
+        --build-arg VERSION="{{sem_ver}}" \
+        --platform 'linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7' \
         --tag "{{public_repo}}:latest" \
         --tag "{{public_repo}}:{{sem_ver}}" \
         .
     docker image push --all-tags "{{public_repo}}"
+
+scout: _build
+    docker scout quickview {{compose_project_name}}-devel:latest
 
 update-reference:
     #!/usr/bin/env bash
