@@ -5,6 +5,12 @@ ARG VERSION
 LABEL maintainer="Mauro Iorio <iorio.mauro@gmail.com>"
 
 RUN set -uex && \
+    apk update && apk upgrade --no-cache
+
+RUN set -uex && \
+    pip install --upgrade pip
+
+RUN set -uex && \
     pip install docker Faker
 
 WORKDIR /src
